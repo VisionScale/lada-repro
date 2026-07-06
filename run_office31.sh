@@ -26,7 +26,9 @@ fi
 mkdir -p "${HOST_DATA_DIR}/LADA_logs"
 
 echo "Running LADA (LAS + LAA) on Office-31, GPU ${GPU_ID} ..."
-docker run --rm --gpus "device=${GPU_ID}" \
+docker run --rm \
+    --gpus "device=${GPU_ID}" \
+    --shm-size=8g \
     -v "${HOST_DATA_DIR}/office31:${CONTAINER_DATA_DIR}/office31" \
     -v "${HOST_DATA_DIR}/LADA_logs:/workspace/LADA/log" \
     "${IMAGE}" \
