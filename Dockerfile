@@ -10,8 +10,9 @@ RUN pip install --no-cache-dir \
     scikit-learn \
     scipy
 
-# Remove a conflicting `utils` package from the base image so LADA's utils/ is used
-RUN pip uninstall -y utils || true
+# Remove a conflicting `utils` directory from the base image so LADA's utils/ is used
+RUN rm -rf /usr/local/lib/python3.10/dist-packages/utils \
+    /usr/local/lib/python3.10/dist-packages/utils-*.dist-info
 
 # Copy the LADA project
 COPY . /workspace/LADA
